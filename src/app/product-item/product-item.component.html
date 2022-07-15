@@ -1,1 +1,12 @@
-<p>product-item works!</p>
+<li
+
+*ngFor="let post of posts"
+
+class="product-container list-group-item">
+<img class="product-image" src="{{post.url}}">
+{{ post.name }}
+<br>
+<br>
+
+{{ post.price }}
+</li>

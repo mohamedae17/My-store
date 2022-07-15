@@ -1,3 +1,4 @@
+import { ProductServicesService } from './../Services/product-services.service';
 import { Component, OnInit } from '@angular/core';
 
 @Component({
@@ -6,10 +7,21 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent implements OnInit {
+  posts:any;
+  constructor(private service:ProductServicesService) {}
 
-  constructor() { }
 
-  ngOnInit(): void {
-  }
+
+  ngOnInit() {
+
+    this.service.getItems()
+
+      .subscribe(response => {
+
+        this.posts = response;
+
+      });
+
+}
 
 }
