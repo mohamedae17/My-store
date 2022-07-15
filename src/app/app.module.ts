@@ -9,6 +9,7 @@ import { ProductItemComponent } from './product-item/product-item.component';
 import { ProductItemDetailComponent } from './product-item-detail/product-item-detail.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { HttpClientModule } from '@angular/common/http';
+import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +22,8 @@ import { HttpClientModule } from '@angular/common/http';
   imports: [
     BrowserModule,
     AppRoutingModule,
-    HttpClientModule
+    HttpClientModule,
+    NgbModule
   ],
   providers: [],
   bootstrap: [AppComponent]
