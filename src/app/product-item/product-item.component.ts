@@ -11,8 +11,6 @@ export class ProductItemComponent implements OnInit {
   posts:any;
   constructor(private service:ProductServicesService,private router: Router) {}
 
-
-
   ngOnInit() {
 
     this.service.getItems()
