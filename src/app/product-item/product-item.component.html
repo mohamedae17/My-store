@@ -3,14 +3,14 @@
 *ngFor="let post of posts"
 
 class="product-container list-group-item">
-<img class="product-image" src="{{post.url}}">
+<a><img class="product-image" src="{{post.url}}"></a>
 {{ post.name }}
 <br>
 <br>
 
 {{ post.price }}
 
-<select style="width: 60px;" name="" id="">
+<select class="select-input" name="" id="">
   <option value="1">1</option>
   <option value="2">2</option>
   <option value="3">3</option>
