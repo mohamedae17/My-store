@@ -2,7 +2,7 @@
 
 *ngFor="let post of posts"
 
-class="product-container list-group-item">
+class="product-container list-group-item" (click)="GoToProductDetail(post)">
 <a><img class="product-image" src="{{post.url}}"></a>
 {{ post.name }}
 <br>

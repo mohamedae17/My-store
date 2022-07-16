@@ -1,5 +1,6 @@
 import { ProductServicesService } from './../Services/product-services.service';
 import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-product-item',
@@ -8,7 +9,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class ProductItemComponent implements OnInit {
   posts:any;
-  constructor(private service:ProductServicesService) {}
+  constructor(private service:ProductServicesService,private router: Router) {}
 
 
 
@@ -22,6 +23,10 @@ export class ProductItemComponent implements OnInit {
 
       });
 
+}
+
+GoToProductDetail(post:any){
+  this.router.navigate(["/Prouctlist",post.id]);
 }
 
 }
