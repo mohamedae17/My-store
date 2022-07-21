@@ -22,4 +22,8 @@ export class ProductItemDetailComponent implements OnInit {
     });
   }
 
+  added(){
+    alert("Added to cert!");
+  }
+
 }

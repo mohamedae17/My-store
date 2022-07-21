@@ -27,4 +27,7 @@ GoToProductDetail(post:any){
   this.router.navigate(["/Prouctlist",post.id]);
 }
 
+added(){
+  alert("Added to cert!");
+}
 }
