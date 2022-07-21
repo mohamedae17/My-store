@@ -6,10 +6,16 @@ import { HttpClient } from '@angular/common/http';
   providedIn: 'root'
 })
 export class ProductServicesService {
-
+  car = window.localStorage;
   constructor(private http:HttpClient) { }
 
   getItems() : Observable<ProductItemComponent>{
     return this.http.get<ProductItemComponent>("../../assets/data.json");
+  }
+  addToCart(product: object[]): void{
+    this.car.setItem('cart', JSON.stringify(product));
+  }
+  clearCart(): void{
+    this.car.clear();
   }
 }

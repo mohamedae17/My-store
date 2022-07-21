@@ -13,13 +13,7 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit() {
 
-    this.service.getItems()
-
-      .subscribe(response => {
-
-        this.posts = response;
-
-      });
+    this.service.getItems().subscribe(response => {this.posts = response;});
 
 }
 

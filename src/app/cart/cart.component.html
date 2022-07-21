@@ -1,1 +1,26 @@
-<p>cart works!</p>
+<div *ngif="elements.lenght; else none" class="cart-container">
+  <div class="cart-item-details">
+    <div *ngFor="let element of elements" class="cart-item">
+      <img src="{{element.url}}" alt="">
+      <div class="cart-panel">
+        <div class="product-item-detail">{{ element.name}}</div>
+        <div class="product-item-detail">$ {{ element.price}}</div>
+      </div>
+    </div>
+  </div>
+  <div class="form-margin">
+    <form class="form-margin">
+      <h1> Checkout </h1>
+      <label>Full Name: </label><br />
+      <input type='text' name='firstName' required minlength="9" placeholder="Enter First Name">
+      <br />
+      <label>Address: </label><br />
+      <input type='text' name='address' required  minlength="10" placeholder="Enter Address" >
+      <br />
+      <label>Credit Card Number: </label><br />
+      <input type='text' name='creditCard' required  minlength="16" maxlength="16" placeholder="(16-digit number)">
+      <br />
+      <input type='submit' value="Submit" class="btn btn-primary" />
+    </form>
+  </div>
+</div>
