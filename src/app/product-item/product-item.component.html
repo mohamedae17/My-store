@@ -1,13 +1,11 @@
 <li
 
-*ngFor="let post of posts"
-
-class="product-container list-group-item" >
-<a><img class="product-image" src="{{post.url}}" (click)="GoToProductDetail(post)"></a>
-<b>{{ post.name }}</b>
+class="product-container" >
+<a><img class="product-image" src="{{post?.url}}" (click)="GoToProductDetail(post)"></a>
+<b>{{ post?.name }}</b>
 <br>
 
-<b>${{ post.price }}</b>
+<b>${{ post?.price }}</b>
 
 <select class="select-input" name="" id="">
   <option value="1">1</option>

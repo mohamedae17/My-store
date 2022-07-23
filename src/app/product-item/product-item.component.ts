@@ -1,6 +1,7 @@
-import { ProductServicesService } from './../Services/product-services.service';
-import { Component, OnInit } from '@angular/core';
+import { ProductServicesService } from '../Services/product-services.service';
+import { Component, Input, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
+import { cart } from '../cart.model';
 
 @Component({
   selector: 'app-product-item',
@@ -8,12 +9,10 @@ import { Router } from '@angular/router';
   styleUrls: ['./product-item.component.css']
 })
 export class ProductItemComponent implements OnInit {
-  posts:any;
+  @Input() post: cart | undefined;
   constructor(private service:ProductServicesService,private router: Router) {}
 
   ngOnInit() {
-
-    this.service.getItems().subscribe(response => {this.posts = response;});
 
 }
 

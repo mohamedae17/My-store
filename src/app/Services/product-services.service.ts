@@ -1,21 +1,37 @@
 import { Injectable } from '@angular/core';
-import { ProductItemComponent } from '../product-item/product-item.component';
-import { Observable } from 'rxjs';
+import { BehaviorSubject ,Observable } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { HttpClient } from '@angular/common/http';
+import { cart } from '../cart.model';
 @Injectable({
   providedIn: 'root'
 })
 export class ProductServicesService {
-  car = window.localStorage;
+  private carts: cart[] = [];
+  private carts$ = new BehaviorSubject<cart[]>([]);
+  private mycar: cart[] = [];
+  private mycar$ = new BehaviorSubject<cart[]>([]);
   constructor(private http:HttpClient) { }
 
-  getItems() : Observable<ProductItemComponent>{
-    return this.http.get<ProductItemComponent>("../../assets/data.json");
+  getCarts():Observable<cart[]>{
+    return this.carts$.asObservable();
   }
-  addToCart(product: object[]): void{
-    this.car.setItem('cart', JSON.stringify(product));
+
+  loadItems(){
+    return this.http.get<cart[]>("../../assets/data.json").subscribe((carts) => {
+      this.carts = carts;
+      this.carts$.next(this.carts);
+    });
   }
-  clearCart(): void{
-    this.car.clear();
+
+  getItem(id:number) : Observable< cart | undefined >{
+    // this.newcart = this.http.get<ProductItemComponent>("../../assets/data.json");
+    // return this.newcart.getItems().subscribe(arg => this.property = arg);
+    return this.carts$.pipe(map((carts) => carts.find(carrt => carrt.id === id)));
+  }
+
+  add(cartaya: cart) {
+    this.mycar.push(cartaya);
+    this.mycar$.next(this.mycar);
   }
 }

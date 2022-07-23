@@ -1,4 +1,5 @@
 import { ProductServicesService } from './../Services/product-services.service';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
@@ -9,21 +10,21 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductItemDetailComponent implements OnInit {
   posts:any;
+  cart:any;
+  myform = new FormGroup({
+    task: new FormControl('', [Validators.required])
+  });
   constructor(private service:ProductServicesService,private activatedrout:ActivatedRoute) { }
   dept:any;
   ngOnInit(): void {
     this.dept =this.activatedrout.snapshot.paramMap.get("id");
     this.dept--;
-    this.service.getItems()
-    .subscribe(response => {
-
-      this.posts = response;
-
-    });
   }
 
   added(){
     alert("Added to cert!");
+    this.service.add(this.myform.get('task')?.value ?? '');
+    this.myform.reset();
   }
 
 }

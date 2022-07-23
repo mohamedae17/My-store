@@ -13,7 +13,6 @@ export class CartComponent implements OnInit {
   constructor(private prosuctServ: ProductServicesService, private route: Router) { }
 
   ngOnInit(): void {
-    this.elements = this.prosuctServ.getItems();
     this.calculate();
   }
 
