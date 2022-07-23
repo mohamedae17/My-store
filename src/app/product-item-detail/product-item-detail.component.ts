@@ -1,3 +1,5 @@
+import { Observable } from 'rxjs';
+import { cart } from './../cart.model';
 import { ProductServicesService } from './../Services/product-services.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 import { Component, OnInit } from '@angular/core';
@@ -10,7 +12,7 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductItemDetailComponent implements OnInit {
   posts:any;
-  cart:any;
+  cart: cart | undefined;
   myform = new FormGroup({
     task: new FormControl('', [Validators.required])
   });
@@ -18,8 +20,20 @@ export class ProductItemDetailComponent implements OnInit {
   dept:any;
   ngOnInit(): void {
     this.dept =this.activatedrout.snapshot.paramMap.get("id");
+    this.dept++;
     this.dept--;
+    this.service.loadItems();
+    this.service.getCarts().subscribe(res =>{
+      this.posts = res;
+      this.cart = this.getProductById(this.dept)
+    })
+    //  this.posts = this.service.getCarts();
+    //  this.cart = this.getProductById(this.dept);
   }
+
+   getProductById(id: number | null): cart{
+     return this.posts.filter((product: { id: number | null; }) => product.id === id)[0];
+   }
 
   added(){
     alert("Added to cert!");

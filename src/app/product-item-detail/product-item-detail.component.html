@@ -1,10 +1,10 @@
 <form [formGroup]="myform" (ngSubmit)="added()">
   <div class="detail-container">
-    <img src="{{posts[dept].url}}">
+    <img src="{{cart?.url}}">
     <div class="detail-item">
-      <h1>{{ posts[dept].name }}</h1>
-      <b>${{posts[dept].price}}</b><br>
-      <b>{{posts[dept].description}}</b><br><br>
+      <h1>{{ cart?.name }}</h1>
+      <b>${{cart?.price}}</b><br>
+      <b>{{cart?.description}}</b><br><br>
       <select class="select-input" name="" id="">
         <option value="1">1</option>
         <option value="2">2</option>
