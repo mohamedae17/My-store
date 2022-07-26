@@ -34,7 +34,7 @@ export class ProductListComponent implements OnInit {
         alert(exist);
         console.log(this.cartproduct[exist].quantity );
         console.log(event.quantity);
-
+         this.cartproduct[exist].item.amount = parseInt(event.quantity);
          this.cartproduct[exist].quantity = event.quantity;
          localStorage.setItem("cart", JSON.stringify(this.cartproduct));
       }

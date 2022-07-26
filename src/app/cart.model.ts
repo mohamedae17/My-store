@@ -3,5 +3,6 @@ export type cart = {
   name: string,
   price: number,
   url: string,
-  description: string
+  description: string,
+  amount:number
 }

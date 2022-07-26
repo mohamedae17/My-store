@@ -1,24 +1,29 @@
-<li
+<form (ngSubmit)="added(post, $event)">
+<li class="product-container" >
+  <a><img class="product-image" src="{{post?.url}}" (click)="GoToProductDetail(post)"></a>
+  <b>{{ post?.name }}</b>
+  <br>
 
-class="product-container" >
-<a><img class="product-image" src="{{post?.url}}" (click)="GoToProductDetail(post)"></a>
-<b>{{ post?.name }}</b>
-<br>
+  <b>${{ post?.price }}</b>
 
-<b>${{ post?.price }}</b>
+  <select class="select-input" name="" id="">
+    <!-- <option *ngFor="let item of options;" [ngValue]="item">{{item}}</option> -->
+    <option
+                    *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]"
+                    [ngValue]="item">
+                    {{ item }}
+                </option>
+    <!-- <option value="2">2</option>
+    <option value="3">3</option>
+    <option value="4">4</option>
+    <option value="5">5</option>
+    <option value="6">6</option>
+    <option value="7">7</option>
+    <option value="8">8</option>
+    <option value="9">9</option>
+    <option value="10">10</option> -->
+  </select>
 
-<select class="select-input" [(ngModel)]="amount" name="" id="">
-  <option *ngFor="let item of options;" [value]="item">{{item}}</option>
-  <!-- <option value="2">2</option>
-  <option value="3">3</option>
-  <option value="4">4</option>
-  <option value="5">5</option>
-  <option value="6">6</option>
-  <option value="7">7</option>
-  <option value="8">8</option>
-  <option value="9">9</option>
-  <option value="10">10</option> -->
-</select>
-
-<button class="btn btn-primary" (click)="added(post)">Add to Cart</button>
+  <button type="submit" class="btn btn-primary">Add to Cart</button>
 </li>
+</form>

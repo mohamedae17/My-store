@@ -2,8 +2,26 @@
 <!-- <app-product-item (second) = "addTocart($event)" ></app-product-item> -->
 <div class="cart-container">
 
-  <app-cart-item-details *ngFor="let post of carts$ | async" [element]="post" (second)="addTocart($event)"></app-cart-item-details>
-
+  <!-- <app-cart-item-details *ngFor="let post of carts$ | async" [element]="post" (second)="addTocart($event)"></app-cart-item-details> -->
+  <div  class="cart-item-details">
+    <div *ngFor="let element of cartproduct" class="cart-item">
+      <img src="{{element.item.url}}" alt="">
+      <div class="cart-panel">
+        <div class="product-item-detail">{{ element.item.name}}</div>
+        <div class="product-item-detail">$ {{ element.item.price}}</div>
+        <div class="product-item-detail">
+          <select (change)="calculate(element.item.id, $event)"  style="width: 100px;">
+              <option
+                  *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]"
+                  [ngValue]="item"
+                  [selected]="element.item.amount === item">
+                  {{ item }}
+              </option>
+          </select>
+      </div>
+      </div>
+    </div>
+  </div>
   <div class="form-margin">
     <form class="form-margin">
       <h1> Checkout </h1>

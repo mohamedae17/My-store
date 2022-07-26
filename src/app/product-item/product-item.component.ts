@@ -13,6 +13,7 @@ export class ProductItemComponent implements OnInit {
   @Output() second= new EventEmitter();
   amount:number = 0;
   options:any;
+
   constructor(private service:ProductServicesService,private router: Router) {
     this.options = [1,2,3,4,5,6,7,8,9,10];
   }
@@ -25,8 +26,10 @@ GoToProductDetail(post:any){
   this.router.navigate(["/Prouctlist",post.id]);
 }
 
-added(post:any){
-    this.second.emit({item:this.post,quantity:this.amount})
+added(post:any,event:any){
+  const selectedOption = event.target[0].options[event.target[0].options.selectedIndex].value;
+  post.amount = parseInt(selectedOption) ;
+    this.second.emit({item:this.post,quantity: selectedOption})
   // alert("Added to cert!");
 
 }
