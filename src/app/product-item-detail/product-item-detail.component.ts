@@ -2,7 +2,7 @@ import { Observable } from 'rxjs';
 import { cart } from './../cart.model';
 import { ProductServicesService } from './../Services/product-services.service';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
-import { Component, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 
 @Component({
@@ -12,12 +12,13 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductItemDetailComponent implements OnInit {
   posts:any;
-  cart: cart | undefined;
-  myform = new FormGroup({
-    task: new FormControl('', [Validators.required])
-  });
+  @Input() cart: cart | undefined;
+  // myform = new FormGroup({
+  //   task: new FormControl('', [Validators.required])
+  // });
   constructor(private service:ProductServicesService,private activatedrout:ActivatedRoute) { }
   dept:any;
+  @Output() item = new EventEmitter();
   ngOnInit(): void {
     this.dept =this.activatedrout.snapshot.paramMap.get("id");
     this.dept++;
@@ -25,7 +26,7 @@ export class ProductItemDetailComponent implements OnInit {
     this.service.loadItems();
     this.service.getCarts().subscribe(res =>{
       this.posts = res;
-      this.cart = this.getProductById(this.dept)
+      this.cart = this.getProductById(this.dept);
     })
     //  this.posts = this.service.getCarts();
     //  this.cart = this.getProductById(this.dept);
@@ -37,8 +38,10 @@ export class ProductItemDetailComponent implements OnInit {
 
   added(){
     alert("Added to cert!");
-    this.service.add(this.myform.get('task')?.value ?? '');
-    this.myform.reset();
+    this.item.emit(this.getProductById(this.dept));
+    // this.service.add(this.myform.get('task')?.value ?? '');
+    // this.myform.reset();
+    // this.service.addToCart(newcart);
   }
 
 }

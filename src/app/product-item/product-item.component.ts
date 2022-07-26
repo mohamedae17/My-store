@@ -1,5 +1,5 @@
 import { ProductServicesService } from '../Services/product-services.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { Router } from '@angular/router';
 import { cart } from '../cart.model';
 
@@ -10,7 +10,12 @@ import { cart } from '../cart.model';
 })
 export class ProductItemComponent implements OnInit {
   @Input() post: cart | undefined;
-  constructor(private service:ProductServicesService,private router: Router) {}
+  @Output() second= new EventEmitter();
+  amount:number = 0;
+  options:any;
+  constructor(private service:ProductServicesService,private router: Router) {
+    this.options = [1,2,3,4,5,6,7,8,9,10];
+  }
 
   ngOnInit() {
 
@@ -20,7 +25,9 @@ GoToProductDetail(post:any){
   this.router.navigate(["/Prouctlist",post.id]);
 }
 
-added(){
-  alert("Added to cert!");
+added(post:any){
+    this.second.emit({item:this.post,quantity:this.amount})
+  // alert("Added to cert!");
+
 }
 }

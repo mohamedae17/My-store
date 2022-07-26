@@ -1,13 +1,9 @@
-<div *ngif="elements.lenght; else none" class="cart-container">
-  <div class="cart-item-details">
-    <div *ngFor="let element of elements" class="cart-item">
-      <img src="{{element.url}}" alt="">
-      <div class="cart-panel">
-        <div class="product-item-detail">{{ element.name}}</div>
-        <div class="product-item-detail">$ {{ element.price}}</div>
-      </div>
-    </div>
-  </div>
+<!-- <app-product-list></app-product-list> -->
+<!-- <app-product-item (second) = "addTocart($event)" ></app-product-item> -->
+<div class="cart-container">
+
+  <app-cart-item-details *ngFor="let post of carts$ | async" [element]="post" (second)="addTocart($event)"></app-cart-item-details>
+
   <div class="form-margin">
     <form class="form-margin">
       <h1> Checkout </h1>
