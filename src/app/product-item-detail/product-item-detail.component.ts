@@ -18,7 +18,8 @@ export class ProductItemDetailComponent implements OnInit {
   // });
   constructor(private service:ProductServicesService,private activatedrout:ActivatedRoute) { }
   dept:any;
-  @Output() item = new EventEmitter();
+  cartproduct:any[] = [];
+  @Output() first = new EventEmitter();
   ngOnInit(): void {
     this.dept =this.activatedrout.snapshot.paramMap.get("id");
     this.dept++;
@@ -36,12 +37,17 @@ export class ProductItemDetailComponent implements OnInit {
      return this.posts.filter((product: { id: number | null; }) => product.id === id)[0];
    }
 
-  added(){
+  added(cart:any,event:any){
     alert("Added to cert!");
-    this.item.emit(this.getProductById(this.dept));
+    const selectedOption = event.target[0].options[event.target[0].options.selectedIndex].value;
+    cart.amount = parseInt(selectedOption) ;
+    console.log(cart);
+    this.first.emit({item:cart,quantity: selectedOption});
     // this.service.add(this.myform.get('task')?.value ?? '');
     // this.myform.reset();
     // this.service.addToCart(newcart);
+
   }
+
 
 }

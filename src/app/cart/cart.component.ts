@@ -23,17 +23,38 @@ export class CartComponent implements OnInit {
   // constructor(private prosuctServ: ProductServicesService) { }
 
   ngOnInit(): void {
+
     //this.prosuctServ.loadcar();
     // this.elements = this.prosuctServ.getCarts();
     if("cart" in localStorage){
       this.cartproduct = JSON.parse(localStorage.getItem("cart")!);
     }
+    this.calculate();
   }
   addTocart(event:any){
     console.log(event);
     // console.log("DDDDD");
   }
-  calculate(id:number,event:any): void{
+  parseeINt(element:any){
+    return parseInt(element.quantity);
+  }
+  update(element:any,id:number,event:any){
+    console.log(event.target.value);
+    const selectedOption = event.target.value;
+    element.quantity = parseInt(selectedOption);
+    if(element.quantity == 0){
+      console.log("DDDDd");
+       console.log(id);
+      this.cartproduct.splice(id,1);
+    }
+    localStorage.setItem("cart", JSON.stringify(this.cartproduct));
+    this.calculate();
+  }
+  calculate(): void{
     //
+    this.total=0;
+    for(let x in this.cartproduct){
+      this.total += this.cartproduct[x].item.price * this.cartproduct[x].quantity;
+    }
   }
 }

@@ -4,23 +4,26 @@
 
   <!-- <app-cart-item-details *ngFor="let post of carts$ | async" [element]="post" (second)="addTocart($event)"></app-cart-item-details> -->
   <div  class="cart-item-details">
-    <div *ngFor="let element of cartproduct" class="cart-item">
+    <div *ngFor="let element of cartproduct; let index = index;" class="cart-item">
       <img src="{{element.item.url}}" alt="">
       <div class="cart-panel">
-        <div class="product-item-detail">{{ element.item.name}}</div>
-        <div class="product-item-detail">$ {{ element.item.price}}</div>
-        <div class="product-item-detail">
-          <select (change)="calculate(element.item.id, $event)"  style="width: 100px;">
+        <b>{{ element.item.name}}</b>
+        <div>$ {{ element.item.price}}</div>
+        <div>
+          <label>Amount : </label>
+          <input type="number" id="quantity" name="quantity" value ="{{parseeINt(element)}}" (change)="update(element,index,$event)" min="0" max="10">
+          <!-- <select (change)="calculate(element.item.id, $event)"  style="width: 100px;">
               <option
                   *ngFor="let item of [1,2,3,4,5,6,7,8,9,10]"
                   [ngValue]="item"
                   [selected]="element.item.amount === item">
                   {{ item }}
               </option>
-          </select>
+          </select> -->
       </div>
       </div>
     </div>
+    <b> Total price : {{total}}</b>
   </div>
   <div class="form-margin">
     <form class="form-margin">
