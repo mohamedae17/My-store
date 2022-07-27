@@ -23,10 +23,9 @@ export class ProductListComponent implements OnInit {
   }
 
   Add(event:any){
-    // console.log(event);\
     if("cart" in localStorage){
       this.cartproduct = JSON.parse(localStorage.getItem("cart")!);
-      // let exist = this.cartproduct.find(item => item.item.id == event.item.id);
+
       if(this.cartproduct.find(item => item.item.id == event.item.id && item.quantity == event.quantity)){
         alert("Product in your cart already");
       }else if(this.cartproduct.find(item => item.item.id == event.item.id && item.quantity != event.quantity)){
@@ -39,8 +38,6 @@ export class ProductListComponent implements OnInit {
          localStorage.setItem("cart", JSON.stringify(this.cartproduct));
       }
       else{
-
-        // localStorage.setItem("cart",JSON.stringify(event));
         this.cartproduct.push(event);
         localStorage.setItem("cart", JSON.stringify(this.cartproduct));
       }
