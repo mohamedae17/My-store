@@ -1,7 +1,7 @@
 import { cart } from './../cart.model';
 import { Observable } from 'rxjs';
 import { ProductServicesService } from './../Services/product-services.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 import { Router } from '@angular/router';
 
 @Component({
@@ -14,27 +14,19 @@ export class CartComponent implements OnInit {
   total: number = 0;
   cartproduct:any[] = [];
   carts$: Observable<cart[]> | undefined;
-  // carts$: Observable<cart[]> | undefined;
-  // @Input() element: cart | undefined;
+  firstName:any;
+  address:any;
+  creditCard:any;
   constructor(private service:ProductServicesService, private route: Router) {
     this.service.loadItems();
     this.carts$ = this.service.getCarts();
    }
-  // constructor(private prosuctServ: ProductServicesService) { }
 
   ngOnInit(): void {
-
-    //this.prosuctServ.loadcar();
-    // this.elements = this.prosuctServ.getCarts();
-    if("cart" in localStorage){
-      this.cartproduct = JSON.parse(localStorage.getItem("cart")!);
-    }
+    if("cart" in localStorage){this.cartproduct = JSON.parse(localStorage.getItem("cart")!);}
     this.calculate();
   }
-  addTocart(event:any){
-    console.log(event);
-    // console.log("DDDDD");
-  }
+
   parseeINt(element:any){
     return parseInt(element.quantity);
   }
@@ -51,10 +43,13 @@ export class CartComponent implements OnInit {
     this.calculate();
   }
   calculate(): void{
-    //
     this.total=0;
     for(let x in this.cartproduct){
       this.total += this.cartproduct[x].item.price * this.cartproduct[x].quantity;
     }
+  }
+
+  success(firstName: string,total:number): void{
+    this.route.navigateByUrl(`success/${firstName}/${total}`);
   }
 }
