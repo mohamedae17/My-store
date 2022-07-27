@@ -1,5 +1,4 @@
-import { SuccessComponent } from './success/success.component';
-import { ProductItemDetailComponent } from './product-item-detail/product-item-detail.component';
+import { ConfirmationComponent } from './confirmation/confirmation.component';
 import { CartComponent } from './cart/cart.component';
 import { ProductListComponent } from './product-list/product-list.component';
 import { NgModule } from '@angular/core';
@@ -11,7 +10,7 @@ const routes: Routes = [
   {path:'Prouctlist' , component:ProductListComponent},
   {path:'cart' , component:CartComponent},
   {path:'Prouctlist/:id',component:CartItemDetailsComponent},
-  {path: 'success/:firstname/:total', component: SuccessComponent}
+  {path: 'success/:firstname/:total', component: ConfirmationComponent}
 ];
 
 @NgModule({

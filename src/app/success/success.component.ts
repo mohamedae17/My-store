@@ -7,13 +7,11 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./success.component.css']
 })
 export class SuccessComponent implements OnInit {
-  name:any;
-  total:any;
-  constructor(private activatedrout:ActivatedRoute) { }
+
+  constructor() { }
 
   ngOnInit(): void {
-    this.name = this.activatedrout.snapshot.paramMap.get("firstname");
-    this.total = this.activatedrout.snapshot.paramMap.get("total");
+
   }
 
 }
