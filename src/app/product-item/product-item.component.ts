@@ -20,17 +20,16 @@ export class ProductItemComponent implements OnInit {
 
   ngOnInit() {
 
-}
+  }
 
-GoToProductDetail(post:any){
-  this.router.navigate(["/Prouctlist",post.id]);
-}
+  GoToProductDetail(post:any){
+    this.router.navigate(["/Prouctlist",post.id]);
+  }
 
-added(post:any,event:any){
-  const selectedOption = event.target[0].options[event.target[0].options.selectedIndex].value;
-  post.amount = parseInt(selectedOption) ;
-    this.second.emit({item:this.post,quantity: selectedOption})
-  // alert("Added to cert!");
+  added(post:any,event:any){
+    const selectedOption = event.target[0].options[event.target[0].options.selectedIndex].value;
+    post.amount = parseInt(selectedOption) ;
+      this.second.emit({item:this.post,quantity: selectedOption})
 
-}
+  }
 }

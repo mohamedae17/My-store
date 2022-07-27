@@ -12,25 +12,19 @@ import { ActivatedRoute } from '@angular/router';
 })
 export class ProductItemDetailComponent implements OnInit {
   posts:any;
-  @Input() cart: cart | undefined;
-  // myform = new FormGroup({
-  //   task: new FormControl('', [Validators.required])
-  // });
-  constructor(private service:ProductServicesService,private activatedrout:ActivatedRoute) { }
-  dept:any;
+  Id:any;
   cartproduct:any[] = [];
+  @Input() cart: cart | undefined;
   @Output() first = new EventEmitter();
+  constructor(private service:ProductServicesService,private activatedrout:ActivatedRoute) { }
   ngOnInit(): void {
-    this.dept =this.activatedrout.snapshot.paramMap.get("id");
-    this.dept++;
-    this.dept--;
+    this.Id = this.activatedrout.snapshot.paramMap.get("id");
+    this.Id= parseInt(this.Id);
     this.service.loadItems();
     this.service.getCarts().subscribe(res =>{
       this.posts = res;
-      this.cart = this.getProductById(this.dept);
+      this.cart = this.getProductById(this.Id);
     })
-    //  this.posts = this.service.getCarts();
-    //  this.cart = this.getProductById(this.dept);
   }
 
    getProductById(id: number | null): cart{
@@ -43,10 +37,6 @@ export class ProductItemDetailComponent implements OnInit {
     cart.amount = parseInt(selectedOption) ;
     console.log(cart);
     this.first.emit({item:cart,quantity: selectedOption});
-    // this.service.add(this.myform.get('task')?.value ?? '');
-    // this.myform.reset();
-    // this.service.addToCart(newcart);
-
   }
 
 
