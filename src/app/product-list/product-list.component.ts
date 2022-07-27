@@ -27,10 +27,9 @@ export class ProductListComponent implements OnInit {
       this.cartproduct = JSON.parse(localStorage.getItem("cart")!);
 
       if(this.cartproduct.find(item => item.item.id == event.item.id && item.quantity == event.quantity)){
-        alert("Product in your cart already");
+        //alert("Product in your cart already");
       }else if(this.cartproduct.find(item => item.item.id == event.item.id && item.quantity != event.quantity)){
         let exist = this.cartproduct.findIndex(item => item.item.id == event.item.id  && item.quantity != event.quantity );
-        alert(exist);
         console.log(this.cartproduct[exist].quantity );
         console.log(event.quantity);
          this.cartproduct[exist].item.amount = parseInt(event.quantity);

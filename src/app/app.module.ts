@@ -11,7 +11,6 @@ import { HttpClientModule } from '@angular/common/http';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { CartItemDetailsComponent } from './cart-item-details/cart-item-details.component';
-import { SuccessComponent } from './success/success.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -21,7 +20,6 @@ import { SuccessComponent } from './success/success.component';
     ProductItemDetailComponent,
     ProductListComponent,
     CartItemDetailsComponent,
-    SuccessComponent
   ],
   imports: [
     BrowserModule,

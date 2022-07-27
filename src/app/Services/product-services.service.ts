@@ -7,7 +7,6 @@ import { cart } from '../cart.model';
   providedIn: 'root'
 })
 export class ProductServicesService {
-  myStorage = window.localStorage;
   private carts: cart[] = [];
   private carts$ = new BehaviorSubject<cart[]>([]);
   private mycar: cart[] = [];

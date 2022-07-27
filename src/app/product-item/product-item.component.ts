@@ -27,6 +27,7 @@ export class ProductItemComponent implements OnInit {
   }
 
   added(post:any,event:any){
+    alert('Added to Cart');
     const selectedOption = event.target[0].options[event.target[0].options.selectedIndex].value;
     post.amount = parseInt(selectedOption) ;
       this.second.emit({item:this.post,quantity: selectedOption})
