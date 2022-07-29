@@ -1,3 +1,4 @@
+import { FormBuilder, FormControl, Validators } from '@angular/forms';
 import { cart } from './../cart.model';
 import { Observable } from 'rxjs';
 import { ProductServicesService } from './../Services/product-services.service';
@@ -17,12 +18,25 @@ export class CartComponent implements OnInit {
   firstName:any;
   address:any;
   creditCard:any;
-  constructor(private service:ProductServicesService, private route: Router) {
+  myform:any;
+  constructor(private service:ProductServicesService, private route: Router,private fb: FormBuilder) {
     this.service.loadItems();
     this.carts$ = this.service.getCarts();
+    this.myform = this.fb.group({
+      username: ['', [Validators.required,Validators.minLength(3)] ],
+      address: ['', [Validators.required,Validators.minLength(6)] ],
+      creditCard: ['', [Validators.required,Validators.minLength(16),Validators.maxLength(16),Validators.pattern("[0-9]+")] ],
+
+   });
    }
 
   ngOnInit(): void {
+
+    // firstName: new FormControl(this.firstName, [
+    //   Validators.required,
+    //   Validators.minLength(3),
+    // ]);
+
     if("cart" in localStorage){this.cartproduct = JSON.parse(localStorage.getItem("cart")!);}
     this.calculate();
   }
@@ -35,8 +49,7 @@ export class CartComponent implements OnInit {
     const selectedOption = event.target.value;
     element.quantity = parseInt(selectedOption);
     if(element.quantity == 0){
-      console.log("DDDDd");
-       console.log(id);
+      alert("Item is deleted")
       this.cartproduct.splice(id,1);
     }
     localStorage.setItem("cart", JSON.stringify(this.cartproduct));
@@ -51,5 +64,12 @@ export class CartComponent implements OnInit {
 
   success(firstName: string,total:number): void{
     this.route.navigateByUrl(`success/${firstName}/${total}`);
+  }
+
+  validateName(){
+    if(this.myform.username.invalid){
+      return false;
+    }
+    return true;
   }
 }

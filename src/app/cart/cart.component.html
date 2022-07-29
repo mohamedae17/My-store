@@ -14,18 +14,35 @@
     <b> Total price : {{total}}</b>
   </div>
   <div class="form-margin">
-    <form #form="ngForm" class="form-margin" (ngSubmit)="success(firstName,total)">
+    <form [formGroup]="myform" class="form-margin" (ngSubmit)="success(firstName,total)">
       <h1> Checkout </h1>
       <label>Full Name: </label><br />
-      <input type='text' name='firstName' required minlength="3" placeholder="(minmum 3 characters)" [(ngModel)]="firstName">
+      <input type='text' name='firstName' required minlength="3" formControlName="username" placeholder="(minmum 3 characters)" [(ngModel)]="firstName" (ngModelChange)="validateName()">
+      <div *ngIf="myform.controls['username'].invalid && (myform.controls['username'].dirty || myform.controls['username'].touched)" class="alert">
+        <div ngModelChange>
+        Please enter valid username
+        </div>
+      </div>
+
       <br />
+
       <label>Address: </label><br />
-      <input type='text' name='address' required  minlength="6"  placeholder="(minmum 6 characters)" placeholder="Enter Address" [(ngModel)]="address">
+      <input type='text' name='address' formControlName="address" required  minlength="6"  placeholder="(minmum 6 characters)" [(ngModel)]="address">
+        <div *ngIf="myform.controls['address'].invalid && (myform.controls['address'].dirty || myform.controls['address'].touched)" class="alert">
+          <div *ngIf="myform.controls['address'].invalid">
+          Please enter address
+          </div>
+        </div>
       <br />
       <label>Credit Card Number: </label><br />
-      <input type='text' name='creditCard' required  placeholder="(16-digit number)" minlength="16" maxlength="16" [(ngModel)]="creditCard">
+      <input type='text' name='creditCard' formControlName="creditCard" required  placeholder="(16-digit number)" minlength="16" maxlength="16" [(ngModel)]="creditCard">
+      <div *ngIf="myform.controls['creditCard'].invalid && (myform.controls['creditCard'].dirty || myform.controls['creditCard'].touched)" class="alert">
+        <div *ngIf="myform.controls['creditCard'].invalid">
+        Please enter creditCard
+        </div>
+      </div>
       <br />
-      <input [disabled]="form.invalid" type='submit' value="Submit" class="btn btn-primary" />
+      <input [disabled]="myform.invalid" type='submit' value="Submit" class="btn btn-primary" />
     </form>
   </div>
 </div>
